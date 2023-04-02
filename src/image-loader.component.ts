@@ -1,4 +1,4 @@
-import { CommonModule, ImageLoaderConfig, IMAGE_LOADER, NgOptimizedImage } from '@angular/common';
+import { CommonModule, IMAGE_LOADER, ImageLoaderConfig, NgOptimizedImage } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
@@ -13,7 +13,6 @@ import { Component } from '@angular/core';
       },
     },
   ],
-  styleUrls: ['./image-loader.component.scss'],
   template: `
     <img
       ngSrc="photo-1675946581335-7ce800416a95"
