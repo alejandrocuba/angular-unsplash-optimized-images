@@ -1,5 +1,5 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { ImageLoaderComponent } from './image-loader.component';
+import { ImageCollectionUnsplashComponent } from './image-loader.component';
 
-bootstrapApplication(ImageLoaderComponent)
+bootstrapApplication(ImageCollectionUnsplashComponent)
   .catch(err => console.error(err));
