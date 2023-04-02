@@ -2,7 +2,7 @@ import { CommonModule, IMAGE_LOADER, ImageLoaderConfig, NgOptimizedImage } from 
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'image-loader',
+  selector: 'app-image-loader',
   standalone: true,
   imports: [CommonModule, NgOptimizedImage],
   providers: [
