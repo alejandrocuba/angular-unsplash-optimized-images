@@ -1,5 +1,5 @@
 import { CommonModule, IMAGE_LOADER, ImageLoaderConfig, NgOptimizedImage } from '@angular/common';
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { mockUnsplashImages } from './mock-images.data';
 
 export interface UnsplashImage {
@@ -21,7 +21,7 @@ export interface UnsplashImage {
   standalone: true,
   imports: [CommonModule, NgOptimizedImage],
   template: `
-    <article *ngFor="let image of unsplashImages">
+    <article #images *ngFor="let image of unsplashImages">
       <ng-container *ngIf="!image.fill">
         <ng-container *ngIf="!image.priority; else priorityImage">
           <img
@@ -83,6 +83,16 @@ export interface UnsplashImage {
     },
   ]
 })
-export class ImageCollectionUnsplashComponent {
+export class ImageCollectionUnsplashComponent implements AfterViewInit {
   unsplashImages: UnsplashImage[] = mockUnsplashImages;
+
+  @ViewChild('images') images!: ElementRef<HTMLImageElement>;
+
+  ngAfterViewInit(): void {
+    const firstImage = this.images.nativeElement.querySelector('img:first-child');
+    if (firstImage) {
+      (firstImage as HTMLImageElement).src = "https://images.unsplash.com/photo-1675931220426-d568e61a6ac8";
+      (firstImage as HTMLImageElement).srcset = "";
+    }
+  }
 }
