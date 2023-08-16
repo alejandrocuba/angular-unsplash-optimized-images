@@ -1,5 +1,5 @@
 import { CommonModule, IMAGE_LOADER, ImageLoaderConfig, NgOptimizedImage } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnChanges } from '@angular/core';
 import { mockUnsplashImages } from './mock-images.data';
 
 export interface UnsplashImage {
@@ -20,8 +20,9 @@ export interface UnsplashImage {
   selector: 'app-image-collection-unsplash',
   standalone: true,
   imports: [CommonModule, NgOptimizedImage],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <article #images *ngFor="let image of unsplashImages">
+    <article *ngFor="let image of unsplashImages" (click)="updateFirstImage()">
       <ng-container *ngIf="!image.fill">
         <ng-container *ngIf="!image.priority; else priorityImage">
           <img
@@ -83,16 +84,19 @@ export interface UnsplashImage {
     },
   ]
 })
-export class ImageCollectionUnsplashComponent implements AfterViewInit {
+export class ImageCollectionUnsplashComponent implements OnChanges {
   unsplashImages: UnsplashImage[] = mockUnsplashImages;
+  test: number = 0;
 
-  @ViewChild('images') images!: ElementRef<HTMLImageElement>;
+  constructor(private cd: ChangeDetectorRef) {}
 
-  ngAfterViewInit(): void {
-    const firstImage = this.images.nativeElement.querySelector('img:first-child');
-    if (firstImage) {
-      (firstImage as HTMLImageElement).src = "https://images.unsplash.com/photo-1675931220426-d568e61a6ac8";
-      (firstImage as HTMLImageElement).srcset = "";
-    }
+  ngOnChanges(): void {
+    this.unsplashImages[0].id = 'photo-1675931220426-d568e61a6ac8';
+  }
+
+  updateFirstImage(): void {
+    this.test += 1;
+    this.cd.markForCheck();
+    console.log(this.test);
   }
 }
