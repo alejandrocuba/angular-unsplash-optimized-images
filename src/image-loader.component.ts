@@ -86,10 +86,6 @@ export interface UnsplashImage {
 export class ImageCollectionUnsplashComponent {
   unsplashImages: UnsplashImage[] = mockUnsplashImages;
 
-  ngDoCheck(): void {
-    console.log(this.unsplashImages[0].id);
-  }
-
   updateOptimizedImageSource(): void {
     this.unsplashImages[0].id = 'photo-1675931220426-d568e61a6ac8';
   }
