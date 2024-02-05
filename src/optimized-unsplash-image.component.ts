@@ -9,9 +9,9 @@ import { Component } from '@angular/core';
     <article>
       <img
         alt="Optimized Unsplash Image"
-        ngSrc="photo-1675946581335-7ce800416a95"
-        width="800"
-        height="450"
+        ngSrc="0*hiSjMcbdqbV35wRI"
+        width="600"
+        height="400"
         decoding="sync"
         priority
       />
@@ -21,7 +21,7 @@ import { Component } from '@angular/core';
     {
       provide: IMAGE_LOADER,
       useValue: (config: ImageLoaderConfig) => {
-        return `https://images.unsplash.com/${config.src}?auto=format&w=${config.width}&q=80`;
+        return `https://cdn-images-1.medium.com/max/${config.width}/${config.src}`;
       },
     },
   ]
