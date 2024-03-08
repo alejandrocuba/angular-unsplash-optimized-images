@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
   imports: [NgOptimizedImage],
   template: `
     <article>
+      <h1>Angular Optimized Image</h1>
       <img
         alt="Optimized Unsplash Image"
         ngSrc="0*hiSjMcbdqbV35wRI"
