@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/angular-unsplash-images-optimized",
+            "outputPath": "dist/angular-unsplash-images-optimized/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -97,6 +97,61 @@
             ],
             "scripts": []
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/angular-unsplash-images-optimized/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "inlineStyleLanguage": "scss"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false,
+              "vendorChunk": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@angular-devkit/build-angular:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "angular-unsplash-images-optimized:build:development",
+              "serverTarget": "angular-unsplash-images-optimized:server:development"
+            },
+            "production": {
+              "browserTarget": "angular-unsplash-images-optimized:build:production",
+              "serverTarget": "angular-unsplash-images-optimized:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@angular-devkit/build-angular:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "angular-unsplash-images-optimized:build:production",
+              "serverTarget": "angular-unsplash-images-optimized:server:production"
+            },
+            "development": {
+              "browserTarget": "angular-unsplash-images-optimized:build:development",
+              "serverTarget": "angular-unsplash-images-optimized:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }
